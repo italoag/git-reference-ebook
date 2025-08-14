@@ -1,0 +1,6 @@
+{
+  "startOnLoad": false,
+  "theme": "default",
+  "zenuml": { "enable": false },
+  "gitGraph": { "rotateCommitLabel": false }
+}

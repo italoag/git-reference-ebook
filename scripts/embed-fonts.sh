@@ -1,25 +1,34 @@
+#!/bin/bash
+
+# Script para embeddar fontes no CSS
+cd "$(dirname "$0")/.."
+
+echo "Convertendo fontes para base64..."
+
+# Criar versão do CSS com fontes embeddadas
+cat > dist/styles/ebook-embedded.css << 'EOF'
 /* styles/ebook.css */
 
 /* 1) Fontes */
 @font-face {
   font-family: "PixelTitle";
-  src: url("../fonts/PressStart2P.ttf") format("truetype");
+  src: url("data:font/truetype;base64,$(base64 -i fonts/PressStart2P.ttf)") format("truetype");
   font-display: swap;
 }
 @font-face {
   font-family: "PixelSub";
-  src: url("../fonts/VT323-Regular.ttf") format("truetype");
+  src: url("data:font/truetype;base64,$(base64 -i fonts/VT323-Regular.ttf)") format("truetype");
   font-display: swap;
 }
 @font-face {
   font-family: "InterVar";
-  src: url("../fonts/Inter-Variable.ttf") format("truetype");
+  src: url("data:font/truetype;base64,$(base64 -i fonts/Inter-Variable.ttf)") format("truetype");
   font-weight: 100 900;
   font-display: swap;
 }
 @font-face {
   font-family: "JetBrainsMono Nerd Font";
-  src: url("../fonts/JetBrainsMono-Regular.ttf") format("truetype");
+  src: url("data:font/truetype;base64,$(base64 -i fonts/JetBrainsMono-Regular.ttf)") format("truetype");
   font-display: swap;
 }
 
@@ -68,3 +77,6 @@ img { max-width: 100%; display: block; margin: 14px auto; }
   size: A4;
   margin: 20mm 18mm 22mm 18mm;
 }
+EOF
+
+echo "Fontes embeddadas no CSS criado!"

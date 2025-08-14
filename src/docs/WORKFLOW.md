@@ -1,8 +1,8 @@
-# WORKFLOW — Quadro de Decisão (Git Flow × Trunk-Based)
+# WORKFLOW — QUARDO DE DESCISÃO
 
 Este documento ajuda a escolher e operar o modelo de branching do repositório.
 
-## 1) Checklist Rápido
+## 1) CHECKLIST RÁPIDO
 
 - CI com testes, lint e segurança roda < 10 min?  
   - Sim -> considere Trunk-Based  
@@ -24,9 +24,9 @@ Este documento ajuda a escolher e operar o modelo de branching do repositório.
   - Sim -> Trunk-Based  
   - Nao -> Git Flow (priorize implementar flags)
 
-## 2) Operação Padrão por Modelo
+## 2) OPERAÇÃO PADRÃO POR MODELO
 
-### 2.1 Trunk-Based
+### 2.1 TRUNK-BASED
 
 - Branch principal: `main`  
 - Politicas GitHub:  
@@ -40,7 +40,7 @@ Este documento ajuda a escolher e operar o modelo de branching do repositório.
 - Feature Flags: obrigatorias para codigo incompleto, com kill switch e rollout gradual.  
 - Hotfix: PR curta direto em `main`; revert ou desligar flag se necessario.
 
-### 2.2 Git Flow
+### 2.2 GIT FLOW
 
 - Branches: `main`, `develop`, `feature/*`, `release/*`, `hotfix/*`  
 - Ciclo Feature: `git flow feature start/publish/finish` (ou PR -> `develop`)  
@@ -48,7 +48,7 @@ Este documento ajuda a escolher e operar o modelo de branching do repositório.
 - Hotfix: `git flow hotfix start/finish` (merge em `main` com tag e em `develop`)  
 - Praticas: releases e release branches curtas; PRs e CI em todas as integracoes.
 
-## 3) Boas Práticas Comuns
+## 3) BOAS PRÁTICAS
 
 - Rebase seguro: apenas em branches privadas; publicar com `--force-with-lease`.  
 - Worktree: use para paralelizar hotfix e feature sem novo clone.  
@@ -56,7 +56,7 @@ Este documento ajuda a escolher e operar o modelo de branching do repositório.
 - Observabilidade: metricas DORA (lead time, frequency, failure rate, MTTR).  
 - Segurança: dependabot/renovate, SAST/secret scan, require signed commits (quando aplicavel).  
 
-## 4) Transição (Git Flow -> Trunk-Based)
+## 4) TRANSIÇÃO (GIT FLOW -> TRUNK-BASED)
 
 1) Endurecer `main` (protections + checks).  
 2) Reduzir tamanho de PRs e tempo de review.  
@@ -64,7 +64,7 @@ Este documento ajuda a escolher e operar o modelo de branching do repositório.
 4) Descontinuar `develop`; usar release branch curta so quando necessario.  
 5) Padronizar releases por tag e changelog automatico.
 
-## 5) Comandos Essenciais (Lembrete)
+## 5) COMANDOS ESSENCIAIS
 
 ```bash
 # Rebase seguro

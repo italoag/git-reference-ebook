@@ -1,24 +1,10 @@
-# Guia Completo de Git para Times no GitHub  
-**(Git Flow, Trunk-Based Development, Worktree, Rebase, Stash + Cheat Sheet)**
+# GIT, GUIA COMPLETO
 
-> Compatível com macOS e Windows (Git Bash/PowerShell). Foco em equipes que desejam histórico limpo, CI/CD confiável e governança em repositórios GitHub.
-
----
-
-## Sumário
-1. [Introdução e Setup](#introdução-e-setup)  
-2. [Git Flow — Modelo completo](#git-flow--modelo-completo)  
-3. [Trunk-Based Development (TBD)](#trunk-based-development-tbd)  
-4. [Comparação: Git Flow × Trunk-Based](#comparação-git-flow--trunk-based)  
-5. [git worktree — Múltiplas cópias de trabalho](#git-worktree--múltiplas-cópias-de-trabalho)  
-6. [git rebase — uso correto e seguro](#git-rebase--uso-correto-e-seguro)  
-7. [git stash — snapshots temporários](#git-stash--snapshots-temporários)  
-8. [Cheat Sheet / Reference Card](#cheat-sheet--reference-card)  
-9. [Referências](#referências)
+> Git Flow, Trunk-Based Development, Worktree, Rebase, Stash + Cheat Sheet. Foco em equipes que desejam histórico limpo, CI/CD confiável e governança em repositórios GitHub.
 
 ---
 
-## Introdução e Setup
+## INTRODUÇÃO E SETUP
 
 **Identidade e editor**
 ```bash
@@ -37,7 +23,7 @@ git config --global core.editor "code --wait"   # VS Code; ajuste se preferir
 
 ---
 
-## Git Flow — Modelo completo
+## GIT FLOW
 
 ![Git Flow](diagrams/gitflow.svg)
 
@@ -83,7 +69,7 @@ Dicas
 
 ---
 
-## Trunk-Based Development (TBD)
+## TRUNK BASED
 
 ![Trunk-Based Development](diagrams/trunk.svg)
 
@@ -155,7 +141,7 @@ jobs:
 
 ---
 
-## Comparação: Git Flow × Trunk-Based
+## COMPARAÇÃO - GIT FLOW x TRUNK-BASED
 
 | Criterio | Git Flow | Trunk-Based Development |
 |---|---|---|
@@ -180,7 +166,7 @@ Modelo hibrido (transicao)
 
 ---
 
-## git worktree — Múltiplas cópias de trabalho
+## GIT WORKTREE
 
 Por que: trabalhar em duas ou mais branches em paralelo sem clonar o repo novamente. Economiza espaco e tempo.
 
@@ -202,7 +188,7 @@ Casos tipicos: hotfix urgente paralelo a sua feature; benchmarks isolados; refac
 
 ---
 
-## git rebase — uso correto e seguro
+## GIT REBASE
 
 Regra de ouro: rebase em branches privadas/curtas; se ja publicou, use `--force-with-lease` ao fazer push.
 
@@ -231,7 +217,7 @@ git reset --hard <hash-do-reflog>
 
 ---
 
-## git stash — snapshots temporários
+## GIT STASH
 
 Guardar e restaurar rapidamente:
 ```bash
@@ -249,9 +235,9 @@ Boas praticas: nomeie (-m), inclua untracked (-u) quando necessario, limpe stash
 
 ---
 
-## Cheat Sheet / Reference Card
+## GUIA DE REFERÊNCIA (CHEAT SHEETS)
 
-### Basico
+### BÁSICO
 ```bash
 git status
 git add -p                     # selecao interativa de hunks
@@ -261,7 +247,7 @@ git log --oneline --graph --decorate --all
 git diff / git diff --staged
 ```
 
-### Branching & Merge/Rebase
+### BRANCHING, MERGE & REBASE
 ```bash
 git switch -c feat/x           # (ou checkout -b)
 git merge feat/x
@@ -271,7 +257,7 @@ git cherry-pick <hash>
 git revert <hash>
 ```
 
-### Remotos (GitHub)
+### REMOTOS (GitHub)
 ```bash
 git remote -v
 git push -u origin feat/x
@@ -281,14 +267,14 @@ git push --force-with-lease
 git tag -a v1.2.3 -m "release"; git push origin v1.2.3
 ```
 
-### Recuperacao
+### RECUPERAÇÃO
 ```bash
 git reflog
 git reset --hard <hash>
 git restore --source=<hash> -- <path>   # recuperar arquivo especifico
 ```
 
-### Worktree
+### WORKTREE
 ```bash
 git worktree add ../feat-x feat/x
 git worktree list
@@ -296,7 +282,7 @@ git worktree remove ../feat-x
 git worktree prune
 ```
 
-### Stash
+### STASH
 ```bash
 git stash push -u -m "msg"
 git stash list; git stash show -p
@@ -304,7 +290,7 @@ git stash apply|pop [stash@{N}]
 git stash branch fix/y stash@{N}
 ```
 
-### Git Flow (extensao)
+### GIT FLOW (Extensão)
 ```bash
 git flow init -d
 git flow feature start|publish|finish <nome>
@@ -314,7 +300,7 @@ git flow hotfix  start|finish  <versao>
 
 ---
 
-## Referências
+## REFERÊNCIAS
 
 - Git — Documentation: <https://git-scm.com/docs>  
 - Trunk-Based Development (site oficial): <https://trunkbaseddevelopment.com/>  

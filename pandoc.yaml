@@ -1,16 +1,13 @@
 from: markdown+emoji+autolink_bare_uris
 to: html5
 standalone: true
+embed-resources: true
 metadata:
-  title: "Guia Completo de Git (Git Flow & Trunk-Based)"
-  author: "Italo"
+  title: "GIT FLOW, GUIA COMPLETO"
+  author: "Italo A. G."
   lang: "pt-BR"
 toc: true
-toc-depth: 3
+toc-depth: 2
 number-sections: false
-resource-path:
-  - src
-  - dist
-css:
-  - styles/ebook.css
-  - styles/refcard.css
+include-in-header:
+  - styles/fonts.html
