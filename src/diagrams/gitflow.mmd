@@ -1,0 +1,26 @@
+gitGraph
+   commit id: "init"
+   branch develop
+   checkout develop
+   commit id: "feat A"
+   branch feature/login-oauth
+   checkout feature/login-oauth
+   commit id: "WIP1"
+   commit id: "WIP2"
+   checkout develop
+   merge feature/login-oauth
+   commit id: "prep release"
+   branch release/1.4.0
+   checkout release/1.4.0
+   commit id: "bump version"
+   checkout main
+   merge release/1.4.0 tag: "v1.4.0"
+   checkout develop
+   merge release/1.4.0
+   branch hotfix/1.4.1
+   checkout hotfix/1.4.1
+   commit id: "critical fix"
+   checkout main
+   merge hotfix/1.4.1 tag: "v1.4.1"
+   checkout develop
+   merge hotfix/1.4.1

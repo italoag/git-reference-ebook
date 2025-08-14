@@ -1,0 +1,33 @@
+/* styles/refcard.css */
+/* Container de referência rápida (cheat sheet) */
+.refcard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 10px 0 24px;
+}
+
+/* Caixas com destaque */
+.box {
+  background: #0b1020;
+  color: #e6f1ff;
+  border: 1px solid #1f2a44;
+  border-left: 6px solid #8b5cf6;
+  border-radius: 8px;
+  padding: 10px 12px;
+  box-shadow: 0 1px 5px rgba(0,0,0,.18);
+}
+.box h4 {
+  font-family: "PixelSub", monospace;
+  margin: 0 0 6px;
+  font-size: 12pt;
+}
+.box pre {
+  background: #0f172a !important;
+  border-left-color: #22d3ee;
+}
+
+/* Impressão: manter duas colunas */
+@media print {
+  .refcard { grid-template-columns: 1fr 1fr; }
+}

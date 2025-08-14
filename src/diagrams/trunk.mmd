@@ -1,0 +1,18 @@
+gitGraph
+   commit id: "init"
+   branch main
+   checkout main
+   commit id: "infra"
+   branch feat/login-oauth
+   checkout feat/login-oauth
+   commit id: "oauth base"
+   commit id: "guard flag"
+   checkout main
+   commit id: "deps update"
+   merge feat/login-oauth
+   commit tag: "v2025.08.14" id: "release tag"
+   branch fix/csrf
+   checkout fix/csrf
+   commit id: "fix csrf"
+   checkout main
+   merge fix/csrf

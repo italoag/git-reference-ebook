@@ -1,0 +1,15 @@
+{
+  "name": "git-ebook",
+  "private": true,
+  "scripts": {
+    "diag": "node scripts/preflight.js",
+    "mmd": "mmdc -i src/diagrams/gitflow.mmd -o dist/diagrams/gitflow.svg && mmdc -i src/diagrams/trunk.mmd -o dist/diagrams/trunk.svg",
+    "html": "pandoc src/README.md src/docs/WORKFLOW.md --defaults=pandoc.yaml -o dist/ebook.html",
+    "pdf": "node scripts/print.js",
+    "build": "npm run diag && npm run mmd && npm run html && npm run pdf"
+  },
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^10.9.0",
+    "puppeteer": "^22.0.0"
+  }
+}
