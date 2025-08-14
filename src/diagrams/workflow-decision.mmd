@@ -1,0 +1,75 @@
+---
+config:
+  theme: 'base'
+  themeVariables:
+    primaryColor: '#BB2528'
+    primaryTextColor: '#ffffffff'
+    primaryBorderColor: '#7C0000'
+    lineColor: '#040404ff'
+    secondaryColor: '#020202ff'
+    secondaryTextColor: '#030303ff'
+    tertiaryColor: '#ffffffff'
+    fontFamily: 'JetBrainsMono Nerd Font'
+  flowchart:
+    diagramPadding: 10
+    nodeSpacing: 30
+    rankSpacing: 50
+    curve: 'cardinal'
+    htmlLabels: true
+    padding: 10
+---
+graph TD
+    START[ 🚀 Escolher Workflow Git ]
+    
+    Q1{CI/CD < 10min?}
+    Q2{Deploy contínuo?}
+    Q3{Compliance/<br/>Gates manuais?}
+    Q4{PRs pequenas<br/>≤300 LOC<br/>Review ≤24h?}
+    Q5{Feature flags<br/>disponíveis?}
+    
+    GITFLOW1[ 🔧 Git Flow <br/>Fortalecer CI primeiro ]
+    GITFLOW2[ 📋 Git Flow <br/>ou TBD + approvals ]
+    GITFLOW3[ 🔄 Git Flow <br/>Transição gradual ]
+    GITFLOW4[ 🚩 Git Flow <br/>Implementar flags ]
+    
+    TRUNK[ ✅ Trunk-Based <br/> Development ]
+    
+    RESULT_GF[ 📊 Git Flow ]
+    RESULT_TB[ 🏃 Trunk-Based ]
+    
+    START --> Q1
+    
+    Q1 -->| ❌ Não | GITFLOW1
+    Q1 -->| ✓ Sim | Q2
+    
+    Q2 -->| ❌ Não <br/> Janelas de release | GITFLOW1
+    Q2 -->| ✓ Sim | Q3
+    
+    Q3 -->| ✓ Sim | GITFLOW2
+    Q3 -->| ❌ Não | Q4
+    
+    Q4 -->| ❌ Não | GITFLOW3
+    Q4 -->| ✓ Sim  | Q5
+    
+    Q5 -->| ❌ Não | GITFLOW4
+    Q5 -->| ✓ Sim | TRUNK
+    
+    GITFLOW1 --> RESULT_GF
+    GITFLOW2 --> RESULT_GF
+    GITFLOW3 --> RESULT_GF
+    GITFLOW4 --> RESULT_GF
+    TRUNK --> RESULT_TB
+    
+    classDef startStyle fill:'#e1f5fe',stroke:'#0277bd',stroke-width:2px
+    classDef questionStyle fill:'#f40404ff',stroke:'#efa3a3ff',stroke-width:2px
+    classDef gitflowStyle fill:'#494847ff',stroke:'#cdcac8ff',stroke-width:2px
+    classDef trunkStyle fill:'#e8f5e8,stroke:'#2e7d32',stroke-width:2px
+    classDef resultGfStyle fill:'#000000ff,stroke:'#e60000ff',stroke-width:3px
+    classDef resultTbStyle fill:'#505050ff,stroke:'#000000ff',stroke-width:3px
+    
+    class START startStyle
+    class Q1,Q2,Q3,Q4,Q5 questionStyle
+    class GITFLOW1,GITFLOW2,GITFLOW3,GITFLOW4 gitflowStyle
+    class TRUNK trunkStyle
+    class RESULT_GF resultGfStyle
+    class RESULT_TB resultTbStyle
