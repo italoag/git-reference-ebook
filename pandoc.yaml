@@ -3,11 +3,12 @@ to: html5
 standalone: true
 embed-resources: true
 metadata:
-  title: "GIT FLOW, GUIA COMPLETO"
+  title: "GIT & FLOW, GUIA COMPLETO"
   author: "Italo A. G."
   lang: "pt-BR"
 toc: true
 toc-depth: 2
 number-sections: false
-include-in-header:
-  - styles/fonts.html
+css:
+  - styles/ebook.css
+  - styles/refcard.css

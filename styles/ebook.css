@@ -12,6 +12,11 @@
   font-display: swap;
 }
 @font-face {
+  font-family: "Jersey10";
+  src: url("../fonts/Jersey10-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
   font-family: "InterVar";
   src: url("../fonts/Inter-Variable.ttf") format("truetype");
   font-weight: 100 900;
@@ -35,9 +40,10 @@ h1, h2, h3 {
   letter-spacing: 0.6px;
   margin: 1.6rem 0 0.8rem;
 }
-h1 { font-family: "PixelTitle", monospace; font-size: 20pt; }
-h2 { font-family: "PixelSub", monospace;  font-size: 18pt; }
-h3 { font-family: "PixelSub", monospace;  font-size: 15pt; }
+h1 { font-family: "PixelTitle", monospace; font-size: 18pt; }
+h2 { font-family: "Jersey10", monospace;  font-size: 19pt; }
+h3 { font-family: "Jersey10", monospace;  font-size: 17pt; }
+h4 { font-family: "Jersey10", monospace;  font-size: 15pt;}
 
 /* 3) Código */
 pre, code, kbd, samp {
@@ -50,7 +56,7 @@ pre {
   border-radius: 8px;
   padding: 12px 14px;
   overflow: auto;
-  border-left: 6px solid #38bdf8; /* ciano */
+  border-left: 6px solid #f8383e; /* ciano */
   box-shadow: 0 1px 6px rgba(0,0,0,.15);
 }
 code { background: #111827; color: #f9fafb; padding: 0 3px; border-radius: 4px; }
@@ -67,4 +73,10 @@ img { max-width: 100%; display: block; margin: 14px auto; }
 @page {
   size: A4;
   margin: 20mm 18mm 22mm 18mm;
+}
+
+/* 7) Quebra de página */
+.page-break {
+  page-break-before: always;
+  break-before: page;
 }

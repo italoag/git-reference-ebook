@@ -1,30 +1,14 @@
-# WORKFLOW — QUARDO DE DESCISÃO
+<div class="page-break"></div>
+
+# WORKFLOW: QUARDO DE DESCISÃO
 
 Este documento ajuda a escolher e operar o modelo de branching do repositório.
 
-## 1) CHECKLIST RÁPIDO
+## 1. CHECKLIST RÁPIDO
 
-- CI com testes, lint e segurança roda < 10 min?  
-  - Sim -> considere Trunk-Based  
-  - Nao -> prefira Git Flow (ate fortalecer a CI)
+![](diagrams/workflow-decision.svg)
 
-- Necessidade de deploy continuo (qualquer dia/hora)?  
-  - Sim -> Trunk-Based  
-  - Nao (janelas de release, homolog formal) -> Git Flow
-
-- Compliance/Auditoria exige gates manuais por release?  
-  - Sim -> Git Flow (ou TBD + approvals rigidos)  
-  - Nao -> Trunk-Based
-
-- Cultura de PRs pequenas (<= 300 LOC) e review em <= 24h?  
-  - Sim -> Trunk-Based  
-  - Nao -> Git Flow (transicao gradual depois)
-
-- Feature flags disponiveis e usadas corretamente?  
-  - Sim -> Trunk-Based  
-  - Nao -> Git Flow (priorize implementar flags)
-
-## 2) OPERAÇÃO PADRÃO POR MODELO
+## 2. OPERAÇÃO PADRÃO POR MODELO
 
 ### 2.1 TRUNK-BASED
 
@@ -48,7 +32,7 @@ Este documento ajuda a escolher e operar o modelo de branching do repositório.
 - Hotfix: `git flow hotfix start/finish` (merge em `main` com tag e em `develop`)  
 - Praticas: releases e release branches curtas; PRs e CI em todas as integracoes.
 
-## 3) BOAS PRÁTICAS
+## 3. BOAS PRÁTICAS
 
 - Rebase seguro: apenas em branches privadas; publicar com `--force-with-lease`.  
 - Worktree: use para paralelizar hotfix e feature sem novo clone.  
@@ -56,7 +40,7 @@ Este documento ajuda a escolher e operar o modelo de branching do repositório.
 - Observabilidade: metricas DORA (lead time, frequency, failure rate, MTTR).  
 - Segurança: dependabot/renovate, SAST/secret scan, require signed commits (quando aplicavel).  
 
-## 4) TRANSIÇÃO (GIT FLOW -> TRUNK-BASED)
+## 4. TRANSIÇÃO (GIT FLOW -> TRUNK-BASED)
 
 1) Endurecer `main` (protections + checks).  
 2) Reduzir tamanho de PRs e tempo de review.  
@@ -64,7 +48,7 @@ Este documento ajuda a escolher e operar o modelo de branching do repositório.
 4) Descontinuar `develop`; usar release branch curta so quando necessario.  
 5) Padronizar releases por tag e changelog automatico.
 
-## 5) COMANDOS ESSENCIAIS
+## 5. COMANDOS ESSENCIAIS
 
 ```bash
 # Rebase seguro

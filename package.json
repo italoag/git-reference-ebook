@@ -3,9 +3,9 @@
   "private": true,
   "scripts": {
     "diag": "node scripts/preflight.js",
-    "mmd": "mmdc -c mermaid-config.json -i src/diagrams/gitflow.mmd -o dist/diagrams/gitflow.svg && mmdc -c mermaid-config.json -i src/diagrams/trunk.mmd -o dist/diagrams/trunk.svg",
-    "prepare": "mkdir -p dist && cp -r fonts dist/ && cp -r styles dist/ && cp -r src/diagrams dist/",
-    "html": "npm run prepare && cd dist && pandoc ../src/README.md ../src/docs/WORKFLOW.md --css=styles/ebook.css --css=styles/refcard.css --standalone --embed-resources --metadata title=\"Guia Completo de Git (Git Flow & Trunk-Based)\" --metadata author=\"Italo\" --metadata lang=\"pt-BR\" --toc --toc-depth=3 -o ebook.html",
+    "mmd": "mmdc -c mermaid-config.json -i src/diagrams/gitflow.mmd -o dist/diagrams/gitflow.svg && mmdc -c mermaid-config.json -i src/diagrams/trunk.mmd -o dist/diagrams/trunk.svg && mmdc -c mermaid-config.json -i src/diagrams/workflow-decision.mmd -o dist/diagrams/workflow-decision.svg",
+    "prepare": "mkdir -p dist && cp -r fonts dist/ && cp -r styles dist/ && cp -r src/diagrams dist/ && cp pandoc.yaml dist/",
+    "html": "npm run prepare && cd dist && pandoc ../src/README.md ../src/docs/WORKFLOW.md --defaults=pandoc.yaml -o ebook.html",
     "pdf": "node scripts/print.js",
     "build": "npm run diag && npm run mmd && npm run html && npm run pdf"
   },

@@ -6,18 +6,18 @@
 
 ## INTRODUÇÃO E SETUP
 
-**Identidade e editor**
+### Identidade e editor
 ```bash
 git config --global user.name  "Seu Nome"
 git config --global user.email "seu.email@empresa.com"
 git config --global core.editor "code --wait"   # VS Code; ajuste se preferir
 ```
 
-**Quebra de linha (evitar CRLF/LF):**
+### Quebra de linha (evitar CRLF/LF)
 - Windows: `git config --global core.autocrlf true`
 - macOS/Linux: `git config --global core.autocrlf input`
 
-**Autenticação GitHub**
+### Autenticação GitHub
 - Prefira SSH (chaves) ou GCM Core (HTTPS OAuth/PAT).
 - Ative Signed commits (opcional, recomendado).
 
@@ -25,45 +25,42 @@ git config --global core.editor "code --wait"   # VS Code; ajuste se preferir
 
 ## GIT FLOW
 
-![Git Flow](diagrams/gitflow.svg)
+![](diagrams/gitflow.svg)
 
-Quando usar: versoes programadas, ambientes distintos (homolog/producao), exigencias de auditoria e hardening antes do release.
+Quando usar: versões programadas, ambientes distintos (homologação/producão), exigencias de auditoria e hardening antes do release.
 
-Branches principais
-- `main` (producao): apenas releases estaveis (tagueados).  
-- `develop` (integracao): base das features e origem das releases.
+### Branches principais
+- `main` (producão): apenas releases estaveis (tagueados).  
+- `develop` (integração): base das features e origem das releases.
 
-Branches auxiliares
+### Branches auxiliares
 - `feature/*`: novas funcionalidades a partir de `develop`.  
 - `release/*`: estabilizacao curta antes de ir para `main`; ao terminar, merge em `main` (tag) e em `develop`.  
-- `hotfix/*`: correcoes criticas a partir de `main`; ao terminar, merge em `main` (tag) e em `develop`.
+- `hotfix/*`: correções criticas a partir de `main`; ao terminar, merge em `main` (tag) e em `develop`.
 
-Comandos (extensao git-flow opcional)
+### Comandos (extensão git-flow opcional)
 ```bash
-# Inicializacao
+# Inicialização
 git flow init -d
 
 # Feature
-git flow feature start login-oauth
-# ... commits ...
-git flow feature publish login-oauth         # opcional (colaboracao)
-git flow feature finish  login-oauth         # merge -> develop + cleanup
+git flow feature start login-oauth.     # ... commits ...
+git flow feature publish login-oauth    # opcional (colaboracao)
+git flow feature finish  login-oauth    # merge -> develop + cleanup
 
 # Release
-git flow release start 1.4.0
-# ... fixes finais / version bump ...
-git flow release finish 1.4.0                # merge -> main (tag) e -> develop
+git flow release start 1.4.0.     # ... fixes finais / version bump ...
+git flow release finish 1.4.0     # merge -> main (tag) e -> develop
 git push origin main develop --tags
 
 # Hotfix
-git flow hotfix start 1.4.1
-# ... fix critico ...
-git flow hotfix finish 1.4.1                 # merge -> main (tag) e -> develop
+git flow hotfix start 1.4.1       # ... fix critico ...
+git flow hotfix finish 1.4.1      # merge -> main (tag) e -> develop
 git push origin main develop --tags
 ```
 
-Dicas
-- Use PRs no GitHub para revisao, mesmo com git-flow (em vez de finish local).  
+### Dicas
+- Use PRs no GitHub para revisão, mesmo com git-flow (em vez de finish local).  
 - Mantenha release branches curtas.  
 - Evite acumular features longas; faca rebase frequente com `develop`.
 
@@ -71,17 +68,17 @@ Dicas
 
 ## TRUNK BASED
 
-![Trunk-Based Development](diagrams/trunk.svg)
+![](diagrams/trunk.svg)
 
-Quando usar: entrega continua, deploys frequentes, times com CI forte e PRs pequenas. A branch principal (`main`) e o trunk; branches de feature sao curtas (<= 24–48h) e integradas continuamente.
+Quando usar: entrega continua, deploys frequentes, times com CI forte e PRs pequenas. A branch principal (`main`) e o trunk; branches de feature são curtas (<= 24–48h) e integradas continuamente.
 
-Principios
-- PRs pequenas e revisao rapida.  
+### Principios
+- PRs pequenas e revisão rapida.  
 - Historico linear (Rebase & merge ou Squash & merge).  
-- Feature flags para liberar codigo incompleto com seguranca.  
-- Releases por tag; `release/*` so se estritamente necessario e por poucas horas/dias.
+- Feature flags para liberar codigo incompleto com segurança.  
+- Releases por tag; `release/*` so se estritamente necessário e por poucas horas/dias.
 
-Exemplo de ciclo
+### Exemplo de ciclo
 ```bash
 git checkout main
 git pull --rebase
@@ -96,31 +93,21 @@ git push -u origin feat/login-oauth
 # Merge: "Rebase & merge" ou "Squash & merge"
 ```
 
-Feature flags (exemplos simples)
+### Feature flags (exemplo simples)
 
-TypeScript/Node:
-```ts
-// config.ts
-export const flags = { LOGIN_OAUTH: process.env.LOGIN_OAUTH === "true" };
-
-// login.ts
-import { flags } from "./config";
-export function login(req, res) {
-  return flags.LOGIN_OAUTH ? oauthLogin(req, res) : legacyLogin(req, res);
-}
-```
-
-Java/Spring:
+#### Java/Spring
 ```java
 @Component
 public class FeatureFlags {
   public boolean loginOauth() {
-    return Boolean.parseBoolean(System.getenv().getOrDefault("LOGIN_OAUTH","false"));
+    return Boolean.parseBoolean(
+    System.getenv().getOrDefault("LOGIN_OAUTH","false")
+    );
   }
 }
 ```
 
-Politicas GitHub para TBD
+### Politicas GitHub para TBD
 - Branch protection em `main`: Require pull request review, Required status checks, Require linear history, bloquear force push, apagar branch ao merge.  
 - CI minimo (GitHub Actions):
 ```yaml
@@ -141,7 +128,7 @@ jobs:
 
 ---
 
-## COMPARAÇÃO - GIT FLOW x TRUNK-BASED
+## GIT FLOW x TRUNK-BASED
 
 | Criterio | Git Flow | Trunk-Based Development |
 |---|---|---|
@@ -156,13 +143,16 @@ jobs:
 | Velocidade de entrega | Media/baixa | Alta |
 | Risco de regressao | Mitigado em release branch | Baixo com flags + testes; revert rapido |
 
-Como escolher
+### Como escolher
 - TBD: voce quer deploy a qualquer momento, tem CI forte, cultura de PRs pequenas e feature flags.  
 - Git Flow: voce tem janelas de release, compliance pesado, ambientes separados e precisa de hardening antes de produzir.
 
-Modelo hibrido (transicao)
-1) Endureca `main` (protections, checks). 2) Encurte features. 3) Introduza flags.  
-4) Aposente `develop` gradualmente. 5) Releases por tag com release branch curta quando necessario.
+### Modelo hibrido (transição)
+1) Endureca `main` (protections, checks). 
+2) Encurte features. 
+3) Introduza flags.
+4) Aposente `develop` gradualmente.
+5) Releases por tag com release branch curta quando necessario.
 
 ---
 
@@ -184,13 +174,18 @@ git worktree remove ../feat-login
 git worktree prune  # se removeu a pasta manualmente
 ```
 
-Casos tipicos: hotfix urgente paralelo a sua feature; benchmarks isolados; refactors arriscados sob flag.
+### Casos tipicos
+- hotfix urgente paralelo a feature; 
+- benchmarks isolados; 
+- refatorações arriscadas sob flag.
 
 ---
 
 ## GIT REBASE
 
-Regra de ouro: rebase em branches privadas/curtas; se ja publicou, use `--force-with-lease` ao fazer push.
+### Regra de ouro
+- rebase em branches privadas/curtas; 
+- se já publicado, usar `--force-with-lease` ao fazer push.
 
 Passo a passo (atualizar feature com a base):
 ```bash
@@ -202,16 +197,16 @@ git rebase --continue
 git push --force-with-lease
 ```
 
-Rebase interativo (limpar historico)
+Rebase interativo (limpar historico):
 ```bash
 git rebase -i HEAD~10         # reword/squash/fixup/drop/reorder
 git rebase --update-refs      # atualiza refs dependentes (Git >= 2.38)
 ```
 
-Sair ou desfazer
+Sair ou desfazer:
 ```bash
 git rebase --abort
-git reflog        # seu paraquedas
+git reflog                    # seu paraquedas
 git reset --hard <hash-do-reflog>
 ```
 
@@ -224,14 +219,14 @@ Guardar e restaurar rapidamente:
 git stash push -u -m "WIP: oauth"
 git stash list
 git stash show -p stash@{0}
-git stash apply stash@{0}     # mantem na pilha
-git stash pop                 # aplica e remove da pilha
+git stash apply stash@{0}            # mantem na pilha
+git stash pop                        # aplica e remove da pilha
 git stash branch feat/poc stash@{0}  # cria branch do ponto do stash
 git stash drop stash@{0}
 git stash clear
 ```
-
-Boas praticas: nomeie (-m), inclua untracked (-u) quando necessario, limpe stashes antigos para nao inflar `.git`.
+Boas praticas: nomeie (-m), inclua untracked (-u) quando necessario, 
+limpe stashes antigos para não inflar `.git`.
 
 ---
 
@@ -240,7 +235,7 @@ Boas praticas: nomeie (-m), inclua untracked (-u) quando necessario, limpe stash
 ### BÁSICO
 ```bash
 git status
-git add -p                     # selecao interativa de hunks
+git add -p                     # seleção interativa de hunks
 git commit -m "feat: msg"
 git commit --amend --no-edit   # corrige ultimo commit
 git log --oneline --graph --decorate --all
